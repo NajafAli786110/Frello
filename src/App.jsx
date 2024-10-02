@@ -1,35 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useReducer } from "react";
+import { BrowserRouter as Router, Routes, Route, BrowserRouter } from "react-router-dom"
+import { Dashboard, Login, Projects, Signup } from './pages/index';
+import { Header, Footer } from './components/index';
+import { UserContextProvider } from './context/UserContext.js';
+import { UserReducer } from './reducer/AppReducer.jsx';
+import Testing from "./components/Testing.jsx";
 
-function App() {
-  const [count, setCount] = useState(0)
+
+
+export default function App() {
+
+  const userDetailsData = [
+    {
+      id: 0,
+      name: 'Najaf Ali',
+      email: 'Najaf@gmail.com',
+      pass: 'hello@123',
+    }
+  ]
+
+  // Yaha pai States banai hai jinme me user ka data store karwana hai.
+  const [userData, userDispatch] = useReducer(UserReducer, userDetailsData);
+
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <UserContextProvider value={{ userData, userDispatch }}>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          {/* App Routing Setup */}
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/testing" element={<Testing />} />
+        </Routes>
+        {/* Setup End  */}
+        <Footer />
+      </BrowserRouter>
+    </UserContextProvider>
   )
 }
-
-export default App
