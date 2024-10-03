@@ -4,6 +4,6 @@ export const UserContext = createContext();
 
 export const UserContextProvider = UserContext.Provider;
 
-export const UseUser = () =>{
+export const useCustomContext = () =>{
     return useContext(UserContext);
 }

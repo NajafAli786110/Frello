@@ -1,8 +1,8 @@
 import React from 'react'
-import { UseUser } from '../context/UserContext';
+import { useCustomContext } from '../context/UserContext';
 
 const Testing = () => {
-    const { userData } = UseUser();
+    const { userData } = useCustomContext();
     return (
         <>
             {userData.map((user, i) => (

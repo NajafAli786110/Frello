@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { UseUser } from '../context/UserContext';
+import { useCustomContext } from '../context/UserContext';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const {userDispatch} = UseUser();
+  const {userDispatch} = useCustomContext();
 
   const handleSubmit = (e) => {
     e.preventDefault();
