@@ -19,8 +19,14 @@ export default function App() {
   const userDetailsData = [
     {
       id: 0,
-      name: "Najaf Ali",
+      name: "Najaf Ali Balti",
       email: "Najaf@gmail.com",
+      pass: "hello@123",
+    },
+    {
+      id: 1,
+      name: "Demo",
+      email: "demo@gmail.com",
       pass: "hello@123",
     },
   ];
@@ -73,6 +79,7 @@ export default function App() {
       taskName: "Task 2",
     },
   ];
+
 
   // Yaha pai States banai hai jinme me user ka data store karwana hai.
 

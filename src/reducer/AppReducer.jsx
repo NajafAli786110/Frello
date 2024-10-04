@@ -5,6 +5,7 @@ export function UserReducer(userData, action) {
       return [
         ...userData,
         {
+          id: Math.random(),
           name: action.userName,
           email: action.userEmail,
           pass: action.userPass,
