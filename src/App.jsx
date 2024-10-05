@@ -1,9 +1,10 @@
 import { useEffect, useReducer, useState } from "react";
+import { Triangle } from "react-loader-spinner";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  BrowserRouter,
+  useLocation,
 } from "react-router-dom";
 import { Dashboard, Login, Projects, Signup, UserTask } from "./pages/index";
 import { Header, Footer, ProjectForm } from "./components/index";
@@ -102,22 +103,6 @@ export default function App() {
   const [isOpenTask, setClosedTask] = useState(false);
   // ---> CURRENT USER STATE MANAGE <---
   const [currUserData, setCurrUserData] = useState(currentUser);
-  // useEffect(() => {
-  //   const storeProjectsData = JSON.parse(localStorage.getItem("projects"));
-  //   const storeTasksData = JSON.parse(localStorage.getItem("tasks"));
-
-  //   if (storeProjectsData) {
-  //     projectDispatch({ type: "SET_PROJECTS", payload: storeProjectsData });
-  //   }
-  //   if (storeTasksData) {
-  //     taskDispatch({ type: "SET_TASKS", payload: storeTasksData });
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem("projects", JSON.stringify(projects));
-  //   localStorage.setItem("tasks", JSON.stringify(tasks));
-  // }, [projects, tasks]);
 
   return (
     <UserContextProvider
@@ -138,21 +123,57 @@ export default function App() {
         setLogin,
       }}
     >
-      <BrowserRouter>
+      <Router>
         <Header />
-        <Routes>
-          {/* App Routing Setup */}
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/testing" element={<Testing />} />
-          <Route path="/tasks" element={<UserTask />} />
-          <Route path="/add-a-project" element={<ProjectForm />} />
-        </Routes>
+        <PageLoader />
         {/* Setup End  */}
         <Footer />
-      </BrowserRouter>
+      </Router>
     </UserContextProvider>
+  );
+}
+
+function PageLoader() {
+  // Import UseLocation to tract user route changing state
+  const currlocation = useLocation();
+  // ---> Loading State MANAGE <---
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, [currlocation]);
+
+  return loading ? (
+    <div className="flex justify-center items-center h-screen">
+      <Triangle
+        visible={true}
+        height="80"
+        width="80"
+        color="#4fa94d"
+        ariaLabel="triangle-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+      />
+    </div>
+  ) : (
+    <Routes>
+      <Route path="/" element={<Dashboard />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/projects" element={<Projects />} />
+      <Route path="/testing" element={<Testing />} />
+      <Route path="/tasks" element={<UserTask />} />
+      <Route path="/add-a-project" element={<ProjectForm />} />
+    </Routes>
   );
 }
