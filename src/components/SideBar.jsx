@@ -8,24 +8,20 @@ import {
 import { useCustomContext } from "../context/UserContext";
 
 const SideBar = () => {
-  // Sample user information (this will later be fetched dynamically)
-  const user = {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    profilePicture: "https://img.icons8.com/?size=160&id=108652&format=png",
-  };
+
+  const { currUserData } = useCustomContext();
 
   return (
     <aside className="bg-gray-200 min-h-screen p-4 w-1/5">
       <div className="flex items-center mb-4">
         <img
-          src={user.profilePicture}
+          src={currUserData.profilePicture}
           alt="Profile"
           className="w-12 h-12 rounded-full mr-2"
         />
         <div>
-          <h2 className="font-bold">{user.name}</h2>
-          <p className="text-gray-600 text-sm">{user.email}</p>
+          <h2 className="font-bold">{currUserData.name}</h2>
+          <p className="text-gray-600 text-sm">{currUserData.email}</p>
         </div>
       </div>
       <nav>

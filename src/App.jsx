@@ -80,6 +80,11 @@ export default function App() {
     },
   ];
 
+  const currentUser = {
+    name: "John Doe",
+    email: "john.doe@example.com",
+    profilePicture: "https://img.icons8.com/?size=160&id=108652&format=png",
+  };
 
   // Yaha pai States banai hai jinme me user ka data store karwana hai.
 
@@ -92,8 +97,11 @@ export default function App() {
   // ---> EDIT FORM STATE MANAGE <---
   const [isOpen, closeModal] = useState(false);
   // ---> EDIT FORM STATE MANAGE <---
+  const [isLogin, setLogin] = useState(false);
+  // ---> EDIT FORM STATE MANAGE <---
   const [isOpenTask, setClosedTask] = useState(false);
-
+  // ---> CURRENT USER STATE MANAGE <---
+  const [currUserData, setCurrUserData] = useState(currentUser);
   // useEffect(() => {
   //   const storeProjectsData = JSON.parse(localStorage.getItem("projects"));
   //   const storeTasksData = JSON.parse(localStorage.getItem("tasks"));
@@ -119,11 +127,15 @@ export default function App() {
         isOpen,
         isOpenTask,
         tasks,
+        currUserData,
+        isLogin,
         userDispatch,
         projectDispatch,
         closeModal,
         setClosedTask,
         taskDispatch,
+        setCurrUserData,
+        setLogin,
       }}
     >
       <BrowserRouter>
